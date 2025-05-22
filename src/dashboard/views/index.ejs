@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LunaHime - Discord Music Bot</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/landing.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="landing-container">
+        <header class="landing-header">
+            <div class="logo">
+                <img src="/img/logo.png" alt="LunaHime Logo">
+                <h1>LunaHime</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="/" class="active">Home</a></li>
+                    <li><a href="/commands">Commands</a></li>
+                    <li><a href="/dashboard">Dashboard</a></li>
+                    <li><a href="https://discord.com/api/oauth2/authorize?client_id=<%= client.user.id %>&permissions=8&scope=bot%20applications.commands" target="_blank" class="invite-btn">
+                        <i class="fab fa-discord"></i> Add to Discord
+                    </a></li>
+                    <% if (user) { %>
+                        <li class="user-profile">
+                            <img src="https://cdn.discordapp.com/avatars/<%= user.id %>/<%= user.avatar %>.png" alt="<%= user.username %>">
+                            <span><%= user.username %></span>
+                            <a href="/auth/logout" class="logout-btn">Logout</a>
+                        </li>
+                    <% } else { %>
+                        <li><a href="/auth/discord" class="login-btn">Login with Discord</a></li>
+                    <% } %>
+                </ul>
+            </nav>
+            <div class="mobile-menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </header>
+
+        <main>
+            <section class="hero-section">
+                <div class="hero-content">
+                    <h1 class="hero-title">The Ultimate <span class="highlight">Discord Music Bot</span></h1>
+                    <p class="hero-description">Experience seamless music playback from Spotify, YouTube, SoundCloud, and Deezer with high-quality audio and a beautiful anime-themed interface.</p>
+                    <div class="hero-buttons">
+                        <a href="https://discord.com/api/oauth2/authorize?client_id=<%= client.user.id %>&permissions=8&scope=bot%20applications.commands" class="cta-button" target="_blank">
+                            <i class="fab fa-discord"></i> Add to Discord
+                        </a>
+                        <a href="/dashboard" class="secondary-button">
+                            <i class="fas fa-tachometer-alt"></i> Dashboard
+                        </a>
+                    </div>
+                    <div class="hero-stats">
+                        <div class="stat">
+                            <span class="stat-number">100+</span>
+                            <span class="stat-label">Servers</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number">10K+</span>
+                            <span class="stat-label">Users</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number">4</span>
+                            <span class="stat-label">Music Platforms</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <img src="/img/hero-anime.png" alt="LunaHime Bot" class="floating">
+                </div>
+            </section>
+
+            <section class="features-section">
+                <div class="section-header">
+                    <h2>Amazing Features</h2>
+                    <p>Discover what makes LunaHime the perfect music companion for your Discord server</p>
+                </div>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-music"></i>
+                        </div>
+                        <h3>Multiple Music Sources</h3>
+                        <p>Play music from Spotify, YouTube, SoundCloud, and Deezer with ease.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-sliders-h"></i>
+                        </div>
+                        <h3>Advanced Controls</h3>
+                        <p>Pause, resume, skip, loop, and more with both slash and text commands.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-list"></i>
+                        </div>
+                        <h3>Queue Management</h3>
+                        <p>View, shuffle, and clear your music queue with simple commands.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-tachometer-alt"></i>
+                        </div>
+                        <h3>Web Dashboard</h3>
+                        <p>Control your music from a beautiful web interface with real-time updates.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-user-shield"></i>
+                        </div>
+                        <h3>DJ Role System</h3>
+                        <p>Control who can manage music with a dedicated DJ role.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-vote-yea"></i>
+                        </div>
+                        <h3>Vote Skip System</h3>
+                        <p>Democratic song skipping when multiple users are in a voice channel.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="how-it-works">
+                <div class="section-header">
+                    <h2>How It Works</h2>
+                    <p>Getting started with LunaHime is quick and easy</p>
+                </div>
+                <div class="steps">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h3>Add to Discord</h3>
+                            <p>Invite LunaHime to your Discord server with just a few clicks.</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h3>Join a Voice Channel</h3>
+                            <p>Connect to any voice channel in your server.</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h3>Play Music</h3>
+                            <p>Use /play or -play command with a song name or URL.</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">4</div>
+                        <div class="step-content">
+                            <h3>Enjoy!</h3>
+                            <p>Control your music with commands or the web dashboard.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="commands-preview">
+                <div class="section-header">
+                    <h2>Popular Commands</h2>
+                    <p>Here are some of the most used commands</p>
+                </div>
+                <div class="commands-container">
+                    <div class="command-card">
+                        <div class="command-name">/play</div>
+                        <p class="command-description">Play a song from URL or search query</p>
+                        <div class="command-example">Example: /play Nightcore - Rockefeller Street</div>
+                    </div>
+                    <div class="command-card">
+                        <div class="command-name">/queue</div>
+                        <p class="command-description">View the current music queue</p>
+                        <div class="command-example">Example: /queue</div>
+                    </div>
+                    <div class="command-card">
+                        <div class="command-name">/skip</div>
+                        <p class="command-description">Skip the currently playing song</p>
+                        <div class="command-example">Example: /skip</div>
+                    </div>
+                </div>
+                <div class="commands-link">
+                    <a href="/commands" class="view-all-commands">
+                        View All Commands <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </section>
+
+            <section class="cta-section">
+                <div class="cta-content">
+                    <h2>Ready to enhance your Discord server?</h2>
+                    <p>Add LunaHime to your server today and experience the best music bot available!</p>
+                    <a href="https://discord.com/api/oauth2/authorize?client_id=<%= client.user.id %>&permissions=8&scope=bot%20applications.commands" class="cta-button" target="_blank">
+                        <i class="fab fa-discord"></i> Add to Discord
+                    </a>
+                </div>
+                <div class="cta-image">
+                    <img src="/img/luna-cta.png" alt="LunaHime" class="floating">
+                </div>
+            </section>
+        </main>
+
+        <footer class="landing-footer">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <img src="/img/logo.png" alt="LunaHime Logo">
+                    <h3>LunaHime</h3>
+                    <p>The Ultimate Discord Music Bot</p>
+                </div>
+                <div class="footer-links">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/commands">Commands</a></li>
+                        <li><a href="/dashboard">Dashboard</a></li>
+                        <li><a href="https://discord.com/api/oauth2/authorize?client_id=<%= client.user.id %>&permissions=8&scope=bot%20applications.commands" target="_blank">Add to Discord</a></li>
+                    </ul>
+                </div>
+                <div class="footer-social">
+                    <h3>Connect With Us</h3>
+                    <div class="social-icons">
+                        <a href="#" target="_blank" class="social-icon"><i class="fab fa-discord"></i></a>
+                        <a href="#" target="_blank" class="social-icon"><i class="fab fa-github"></i></a>
+                        <a href="#" target="_blank" class="social-icon"><i class="fab fa-twitter"></i></a>
+                        <a href="#" target="_blank" class="social-icon"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; <%= new Date().getFullYear() %> LunaHime. All rights reserved.</p>
+            </div>
+        </footer>
+    </div>
+
+    <script src="/js/main.js"></script>
+</body>
+</html>

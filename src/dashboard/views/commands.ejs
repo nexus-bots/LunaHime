@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Commands - LunaHime</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/landing.css">
+    <link rel="stylesheet" href="/css/commands.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="landing-container">
+        <header class="landing-header">
+            <div class="logo">
+                <img src="/img/logo.png" alt="LunaHime Logo">
+                <h1>LunaHime</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/commands" class="active">Commands</a></li>
+                    <li><a href="/dashboard">Dashboard</a></li>
+                    <li><a href="https://discord.com/api/oauth2/authorize?client_id=<%= client.user.id %>&permissions=8&scope=bot%20applications.commands" target="_blank" class="invite-btn">
+                        <i class="fab fa-discord"></i> Add to Discord
+                    </a></li>
+                    <% if (user) { %>
+                        <li class="user-profile">
+                            <img src="https://cdn.discordapp.com/avatars/<%= user.id %>/<%= user.avatar %>.png" alt="<%= user.username %>">
+                            <span><%= user.username %></span>
+                            <a href="/auth/logout" class="logout-btn">Logout</a>
+                        </li>
+                    <% } else { %>
+                        <li><a href="/auth/discord" class="login-btn">Login with Discord</a></li>
+                    <% } %>
+                </ul>
+            </nav>
+            <div class="mobile-menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </header>
+        
+        <main>
+            <section class="commands-hero">
+                <div class="commands-hero-content">
+                    <h1>LunaHime Commands</h1>
+                    <p>Explore all the commands available to control your music experience</p>
+                </div>
+            </section>
+            
+            <section class="commands-section">
+                <div class="commands-container">
+                    <div class="commands-sidebar">
+                        <div class="commands-search">
+                            <input type="text" id="command-search" placeholder="Search commands...">
+                            <i class="fas fa-search"></i>
+                        </div>
+                        <div class="commands-categories">
+                            <h3>Categories</h3>
+                            <ul>
+                                <li><a href="#music-commands" class="active">Music Commands</a></li>
+                                <li><a href="#queue-commands">Queue Management</a></li>
+                                <li><a href="#dj-commands">DJ Commands</a></li>
+                                <li><a href="#utility-commands">Utility Commands</a></li>
+                            </ul>
+                        </div>
+                        <div class="commands-info">
+                            <div class="info-item">
+                                <i class="fas fa-info-circle"></i>
+                                <p>All commands support both slash commands and text commands with the prefix <code>-</code></p>
+                            </div>
+                            <div class="info-item">
+                                <i class="fas fa-user-shield"></i>
+                                <p>Some commands require DJ role or admin permissions</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="commands-content">
+                        <div class="command-category" id="music-commands">
+                            <h2><i class="fas fa-music"></i> Music Commands</h2>
+                            <p>Commands for playing and controlling music playback</p>
+                            
+                            <div class="command-list">
+                                <div class="command-item">
+                                    <div class="command-header">
+                                        <h3>/play [query]</h3>
+                                        <span class="command-access">Everyone</span>
+                                    </div>
+                                    <div class="command-body">
+                                        <p>Plays a song from YouTube, Spotify, SoundCloud, or Deezer</p>
+                                        <div class="command-details">
+                                            <div class="command-aliases">
+                                                <span class="detail-label">Aliases:</span>
+                                                <span class="detail-value">-play, -p</span>
+                                            </div>
+                                            <div class="command-usage">
+                                                <span class="detail-label">Usage:</span>
+                                                <span class="detail-value">/play [song name or URL]</span>
+                                            </div>
+                                            <div class="command-example">
+                                                <span class="detail-label">Example:</span>
+                                                <span class="detail-value">/play Nightcore - Rockefeller Street</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="command-item">
+                                    <div class="command-header">
+                                        <h3>/pause</h3>
+                                        <span class="command-access">DJ/Admin</span>
+                                    </div>
+                                    <div class="command-body">
+                                        <p>Pauses the currently playing music</p>
+                                        <div class="command-details">
+                                            <div class="command-aliases">
+                                                <span class="detail-label">Aliases:</span>
+                                                <span class="detail-value">-pause, -pa</span>
+                                            </div>
+                                            <div class="command-usage">
+                                                <span class="detail-label">Usage:</span>
+                                                <span class="detail-value">/pause</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="command-item">
+                                    <div class="command-header">
+                                        <h3>/resume</h3>
+                                        <span class="command-access">DJ/Admin</span>
+                                    </div>
+                                    <div class="command-body">
+                                        <p>Resumes the paused music</p>
+                                        <div class="command-details">
+                                            <div class="command-aliases">
+                                                <span class="detail-label">Aliases:</span>
+                                                <span class="detail-value">-resume, -r, -res</span>
+                                            </div>
+                                            <div class="command-usage">
+                                                <span class="detail-label">Usage:</span>
+                                                <span class="detail-value">/resume</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="command-item">
+                                    <div class="command-header">
+                                        <h3>/skip</h3>
+                                        <span class="command-access">DJ/Admin*</span>
+                                    </div>
+                                    <div class="command-body">
+                                        <p>Skips the currently playing song</p>
+                                        <div class="command-details">
+                                            <div class="command-aliases">
+                                                <span class="detail-label">Aliases:</span>
+                                                <span class="detail-value">-skip, -s, -n, -next</span>
+                                            </div>
+                                            <div class="command-usage">
+                                                <span class="detail-label">Usage:</span>
+                                                <span class="detail-value">/skip</span>
+                                            </div>
+                                            <div class="command-note">
+                                                <span class="detail-label">Note:</span>
+                                                <span class="detail-value">* If more than 3 users are in the voice channel, a vote is required</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="command-item">
+                                    <div class="command-header">
+                                        <h3>/info</h3>
+                                        <span class="command-access">Everyone</span>
+                                    </div>
+                                    <div class="command-body">
+                                        <p>Displays information about the currently playing song</p>
+                                        <div class="command-details">
+                                            <div class="command-aliases">
+                                                <span class="detail-label">Aliases:</span>
+                                                <span class="detail-value">-info, -i, -np, -nowplaying</span>
+                                            </div>
+                                            <div class="command-usage">
+                                                <span class="detail-label">Usage:</span>
+                                                <span class="detail-value">/info</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="command-category" id="queue-commands">
+                            <h2><i class="fas fa-list"></i> Queue Management</h2>
+                            <p>Commands for managing the music queue</p>
+                            
+                            <div class="command-list">
+                                <div class="command-item">
+                                    <div class="command-header">
+                                        <h3>/queue</h3>
+                                        <span class="command-access">Everyone</span>
+                                    </div>
+                                    <div class="command-body">
+                                        <p>Displays the current music queue</p>
+                                        <div class="command-details">
+                                            <div class="command-aliases">
+                                                <span class="detail-label">Aliases:</span>
+                                                <span class="detail-value">-queue, -q</span>
+                                            </div>
+                                            <div class="command-usage">
+                                                <span class="detail-label">Usage:</span>
+                                                <span class="detail-value">/queue [page]</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="command-item">
+                                    <div class="command-header">
+                                        <h3>/clear</h3>
+                                        <span class="command-access">DJ/Admin</span>
+                                    </div>
+                                    <div class="command-body">
+                                        <p>Clears the music queue</p>
+                                        <div class="command-details">
+                                            <div class="command-aliases">
+                                                <span class="detail-label">Aliases:</span>
+                                                <span class="detail-value">-clear, -c</span>
+                                            </div>
+                                            <div class="command-usage">
+                                                <span class="detail-label">Usage:</span>
+                                                <span class="detail-value">/clear</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="command-item">
+                                    <div class="command-header">
+                                        <h3>/shuffle</h3>
+                                        <span class="command-access">DJ/Admin</span>
+                                    </div>
+                                    <div class="command-body">
+                                        <p>Shuffles the music queue</p>
+                                        <div class="command-details">
+                                            <div class="command-aliases">
+                                                <span class="detail-label">Aliases:</span>
+                                                <span class="detail-value">-shuffle, -sh</span>
+                                            </div>
+                                            <div class="command-usage">
+                                                <span class="detail-label">Usage:</span>
+                                                <span class="detail-value">/shuffle</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="command-item">
+                                    <div class="command-header">
+                                        <h3>/skipto</h3>
+                                        <span class="command-access">DJ/Admin*</span>
+                                    </div>
+                                    <div class="command-body">
+                                        <p>Skips to a specific position in the queue</p>
+                                        <div class="command-details">
+                                            <div class="command-aliases">
+                                                <span class="detail-label">Aliases:</span>
+                                                <span class="detail-value">-skipto, -st</span>
+                                            </div>
+                                            <div class="command-usage">
+                                                <span class="detail-label">Usage:</span>
+                                                <span class="detail-value">/skipto [position]</span>
+                                            </div>
+                                            <div class="command-example">
+                                                <span class="detail-label">Example:</span>
+                                                <span class="detail-value">/skipto 3</span>
+                                            </div>
+                                            <div class="command-note">
+                                                <span class="detail-label">Note:</span>
+                                                <span class="detail-value">* If more than 3 users are in the voice channel, a vote is required</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="command-category" id="dj-commands">
+                            <h2><i class="fas fa-user-shield"></i> DJ Commands</h2>
+                            <p>Commands that require DJ role or admin permissions</p>
+                            
+                            <div class="command-list">
+                                <div class="command-item">
+                                    <div class="command-header">
+                                        <h3>/loop</h3>
+                                        <span class="command-access">DJ/Admin</span>
+                                    </div>
+                                    <div class="command-body">
+                                        <p>Toggles loop mode (off, track, queue)</p>
+                                        <div class="command-details">
+                                            <div class="command-aliases">
+                                                <span class="detail-label">Aliases:</span>
+                                                <span class="detail-value">-loop, -l</span>
+                                            </div>
+                                            <div class="command-usage">
+                                                <span class="detail-label">Usage:</span>
+                                                <span class="detail-value">/loop [mode]</span>
+                                            </div>
+                                            <div class="command-example">
+                                                <span class="detail-label">Example:</span>
+                                                <span class="detail-value">/loop track</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="command-item">
+                                    <div class="command-header">
+                                        <h3>/seek</h3>
+                                        <span class="command-access">DJ/Admin</span>
+                                    </div>
+                                    <div class="command-body">
+                                        <p>Seeks to a specific position in the current track</p>
+                                        <div class="command-details">
+                                            <div class="command-aliases">
+                                                <span class="detail-label">Aliases:</span>
+                                                <span class="detail-value">-seek, -s</span>
+                                            </div>
+                                            <div class="command-usage">
+                                                <span class="detail-label">Usage:</span>
+                                                <span class="detail-value">/seek [time]</span>
+                                            </div>
+                                            <div class="command-example">
+                                                <span class="detail-label">Example:</span>
+                                                <span class="detail-value">/seek 1:30</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="command-item">
+                                    <div class="command-header">
+                                        <h3>/join</h3>
+                                        <span class="command-access">DJ/Admin</span>
+                                    </div>
+                                    <div class="command-body">
+                                        <p>Makes the bot join your voice channel</p>
+                                        <div class="command-details">
+                                            <div class="command-aliases">
+                                                <span class="detail-label">Aliases:</span>
+                                                <span class="detail-value">-join, -j</span>
+                                            </div>
+                                            <div class="command-usage">
+                                                <span class="detail-label">Usage:</span>
+                                                <span class="detail-value">/join [force]</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="command-item">
+                                    <div class="command-header">
+                                        <h3>/leave</h3>
+                                        <span class="command-access">DJ/Admin</span>
+                                    </div>
+                                    <div class="command-body">
+                                        <p>Makes the bot leave the voice channel</p>
+                                        <div class="command-details">
+                                            <div class="command-aliases">
+                                                <span class="detail-label">Aliases:</span>
+                                                <span class="detail-value">-leave, -le</span>
+                                            </div>
+                                            <div class="command-usage">
+                                                <span class="detail-label">Usage:</span>
+                                                <span class="detail-value">/leave</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="command-category" id="utility-commands">
+                            <h2><i class="fas fa-tools"></i> Utility Commands</h2>
+                            <p>General utility commands</p>
+                            
+                            <div class="command-list">
+                                <div class="command-item">
+                                    <div class="command-header">
+                                        <h3>/help</h3>
+                                        <span class="command-access">Everyone</span>
+                                    </div>
+                                    <div class="command-body">
+                                        <p>Shows help for commands</p>
+                                        <div class="command-details">
+                                            <div class="command-aliases">
+                                                <span class="detail-label">Aliases:</span>
+                                                <span class="detail-value">-help, -h</span>
+                                            </div>
+                                            <div class="command-usage">
+                                                <span class="detail-label">Usage:</span>
+                                                <span class="detail-value">/help [command]</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="command-item">
+                                    <div class="command-header">
+                                        <h3>/ping</h3>
+                                        <span class="command-access">Everyone</span>
+                                    </div>
+                                    <div class="command-body">
+                                        <p>Shows the bot's latency</p>
+                                        <div class="command-details">
+                                            <div class="command-aliases">
+                                                <span class="detail-label">Aliases:</span>
+                                                <span class="detail-value">-ping</span>
+                                            </div>
+                                            <div class="command-usage">
+                                                <span class="detail-label">Usage:</span>
+                                                <span class="detail-value">/ping</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="command-item">
+                                    <div class="command-header">
+                                        <h3>/about</h3>
+                                        <span class="command-access">Everyone</span>
+                                    </div>
+                                    <div class="command-body">
+                                        <p>Shows information about the bot</p>
+                                        <div class="command-details">
+                                            <div class="command-aliases">
+                                                <span class="detail-label">Aliases:</span>
+                                                <span class="detail-value">-about</span>
+                                            </div>
+                                            <div class="command-usage">
+                                                <span class="detail-label">Usage:</span>
+                                                <span class="detail-value">/about</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="command-item">
+                                    <div class="command-header">
+                                        <h3>/setdjrole</h3>
+                                        <span class="command-access">Admin</span>
+                                    </div>
+                                    <div class="command-body">
+                                        <p>Sets the DJ role for the server</p>
+                                        <div class="command-details">
+                                            <div class="command-aliases">
+                                                <span class="detail-label">Aliases:</span>
+                                                <span class="detail-value">-setdjrole</span>
+                                            </div>
+                                            <div class="command-usage">
+                                                <span class="detail-label">Usage:</span>
+                                                <span class="detail-value">/setdjrole [@role]</span>
+                                            </div>
+                                            <div class="command-example">
+                                                <span class="detail-label">Example:</span>
+                                                <span class="detail-value">/setdjrole @DJ</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="command-item">
+                                    <div class="command-header">
+                                        <h3>/setprefix</h3>
+                                        <span class="command-access">Admin</span>
+                                    </div>
+                                    <div class="command-body">
+                                        <p>Changes the prefix for text commands</p>
+                                        <div class="command-details">
+                                            <div class="command-aliases">
+                                                <span class="detail-label">Aliases:</span>
+                                                <span class="detail-value">-setprefix</span>
+                                            </div>
+                                            <div class="command-usage">
+                                                <span class="detail-label">Usage:</span>
+                                                <span class="detail-value">/setprefix [prefix]</span>
+                                            </div>
+                                            <div class="command-example">
+                                                <span class="detail-label">Example:</span>
+                                                <span class="detail-value">/setprefix !</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="commands-cta">
+                <div class="cta-content">
+                    <h2>Ready to try these commands?</h2>
+                    <p>Add LunaHime to your Discord server now!</p>
+                    <a href="https://discord.com/api/oauth2/authorize?client_id=<%= client.user.id %>&permissions=8&scope=bot%20applications.commands" class="cta-button" target="_blank">
+                        <i class="fab fa-discord"></i> Add to Discord
+                    </a>
+                </div>
+            </section>
+        </main>
+        
+        <footer class="landing-footer">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <img src="/img/logo.png" alt="LunaHime Logo">
+                    <h3>LunaHime</h3>
+                    <p>The Ultimate Discord Music Bot</p>
+                </div>
+                <div class="footer-links">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/commands">Commands</a></li>
+                        <li><a href="/dashboard">Dashboard</a></li>
+                        <li><a href="https://discord.com/api/oauth2/authorize?client_id=<%= client.user.id %>&permissions=8&scope=bot%20applications.commands" target="_blank">Add to Discord</a></li>
+                    </ul>
+                </div>
+                <div class="footer-social">
+                    <h3>Connect With Us</h3>
+                    <div class="social-icons">
+                        <a href="#" target="_blank" class="social-icon"><i class="fab fa-discord"></i></a>
+                        <a href="#" target="_blank" class="social-icon"><i class="fab fa-github"></i></a>
+                        <a href="#" target="_blank" class="social-icon"><i class="fab fa-twitter"></i></a>
+                        <a href="#" target="_blank" class="social-icon"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; <%= new Date().getFullYear() %> LunaHime. All rights reserved.</p>
+            </div>
+        </footer>
+    </div>
+    
+    <script src="/js/main.js"></script>
+    <script src="/js/commands.js"></script>
+</body>
+</html>
